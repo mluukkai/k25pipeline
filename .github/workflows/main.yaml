@@ -41,17 +41,11 @@ jobs:
       - name: 'Set up Docker Buildx'
         run: gcloud auth configure-docker "$REGISTRY"
           
-      - name : 'Set up Docker Buildx'
+      - name : 'Form the image name'
         run: echo "IMAGE_TAG=$REGISTRY/$PROJECT_ID/$REPOSITORY/$IMAGE:$BRANCH-$GITHUB_SHA" >> $GITHUB_ENV
 
-      - name: 'as'
-        run: echo "$IMAGE_TAG"
-
-      - name: 'peist'
-        run: echo "$REGISTRY/$PROJECT_ID/$REPOSITORY/$IMAGE:$BRANCH-$GITHUB_SHA"
-
       - name: Build
-        run: docker build --tag "$REGISTRY/$PROJECT_ID/$REPOSITORY/$IMAGE:$BRANCH-$GITHUB_SHA" .
+        run: docker build --tag "$IMAGE_TAG" .
 
       - name: Publish
-        run: docker push "$REGISTRY/$PROJECT_ID/$REPOSITORY/$IMAGE:$BRANCH-$GITHUB_SHA"
+        run: docker push "$IMAGE_TAG"
