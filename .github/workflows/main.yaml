@@ -42,13 +42,13 @@ jobs:
         run: gcloud auth configure-docker "$REGISTRY"
 
       - name: 'peist'
-        run: echo "$REGISTRY/$REPOSITORY/$PROJECT_ID/$IMAGE:$BRANCH-$GITHUB_SHA"
+        run: echo "$REGISTRY/$PROJECT_ID/$REPOSITORY/$IMAGE:$BRANCH-$GITHUB_SHA"
 
       - name: Build1
-        run: docker build --tag "$REGISTRY/$REPOSITORY/$PROJECT_ID/$IMAGE:$BRANCH-$GITHUB_SHA" .
+        run: docker build --tag "$REGISTRY/$PROJECT_ID/$REPOSITORY/$IMAGE:$BRANCH-$GITHUB_SHA" .
 
       - name: Publish1
-        run: docker push "$REGISTRY/$REPOSITORY/$PROJECT_ID/$IMAGE:$BRANCH-$GITHUB_SHA"
+        run: docker push "$REGISTRY/$PROJECT_ID/$REPOSITORY/$IMAGE:$BRANCH-$GITHUB_SHA"
 
       - name: Build
         run: docker build --tag "gcr.io/$PROJECT_ID/$IMAGE:$BRANCH-$GITHUB_SHA" .
