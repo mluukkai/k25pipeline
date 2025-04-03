@@ -37,7 +37,7 @@ jobs:
           location: '${{ env.GKE_ZONE }}'
 
       - name: 'Set up Docker Buildx'
-        uses: gcloud auth configure-docker europe-north1-b-docker.pkg.dev
+        run: gcloud auth configure-docker europe-north1-b-docker.pkg.dev
 
       - name: Build1
         run: docker build --tag "europe-north1-b-docker.pkg.dev/$PROJECT_ID/$IMAGE:$BRANCH-$GITHUB_SHA" .
