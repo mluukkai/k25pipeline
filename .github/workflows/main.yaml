@@ -40,11 +40,11 @@ jobs:
 
       - name: 'Set up Docker Buildx'
         run: gcloud auth configure-docker "$REGISTRY"
+          
+      - name : 'Set up Docker Buildx'
+        run: echo "IMAGE_TAG=$REGISTRY/$PROJECT_ID/$REPOSITORY/$IMAGE:$BRANCH-$GITHUB_SHA" >> $GITHUB_ENV
 
-      - name: envi
-        run: IMAGE_TAG="$REGISTRY/$PROJECT_ID/$REPOSITORY/$IMAGE:$BRANCH-$GITHUB_SHA"
-
-      - name: 'peist'
+      - name: 'as'
         run: echo "$IMAGE_TAG"
 
       - name: 'peist'
