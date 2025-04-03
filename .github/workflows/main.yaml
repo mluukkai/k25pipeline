@@ -56,5 +56,4 @@ jobs:
       - name: Deploy
         run: |-
           kustomize edit set image PROJECT/IMAGE="$IMAGE_TAG"
-          kustomize build . 
-      #| kubectl apply -f -
+          kustomize build . | kubectl apply -f -

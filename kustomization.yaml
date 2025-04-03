@@ -6,4 +6,4 @@ resources:
 
 images:
   - name: PROJECT/IMAGE
-    newName: mluukkai/colorcontent
+    newName: mluukkai/doesnot_exist
