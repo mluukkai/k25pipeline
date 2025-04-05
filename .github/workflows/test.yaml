@@ -2,6 +2,9 @@ name: test
 
 on:
   push:
+    branches:
+      - dev
+      - feature/*
 
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
