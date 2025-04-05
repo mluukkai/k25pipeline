@@ -7,7 +7,7 @@ env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
   GKE_CLUSTER: dwk-cluster
   GKE_ZONE: europe-north1-b
-  NAMESPACE: ${{ github.event.ref == 'main' && 'lecture' || github.ref_name }}
+  NAMESPACE: ${{ github.event.ref == 'main' && 'lecture' || github.event.ref }}
 
 jobs:
   build-publish-deploy:
