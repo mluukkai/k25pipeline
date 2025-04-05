@@ -1,4 +1,4 @@
-name: Release application
+name: DELETE application
 
 on:
   delete:
@@ -7,7 +7,7 @@ env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
   GKE_CLUSTER: dwk-cluster
   GKE_ZONE: europe-north1-b
-  NAMESPACE: ${{ github.ref_name == 'main' && 'lecture' || github.ref_name }}
+  NAMESPACE: ${{ github.event.ref == 'main' && 'lecture' || github.ref_name }}
 
 jobs:
   build-publish-deploy:
@@ -36,6 +36,9 @@ jobs:
 
       - name: Set up Kustomize
         uses: imranismail/setup-kustomize@v2.1.0
+
+      - name: Deleting namespace
+        run: echo $NAMESPACE
 
       - name: Delete all
         run: |-
