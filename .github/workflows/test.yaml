@@ -1,0 +1,28 @@
+name: test
+
+on:
+  push:
+
+env:
+  PROJECT_ID: ${{ secrets.GKE_PROJECT }}
+  GKE_CLUSTER: dwk-cluster
+  GKE_ZONE: europe-north1-b
+  REGISTRY: europe-north1-docker.pkg.dev
+  REPOSITORY: my-repository
+  IMAGE: dwk-environments
+  SERVICE: dwk-environments
+  BRANCH: ${{ github.ref_name }}
+  NAMESPACE: ${GITHUB_REF#refs/heads/}
+
+jobs:
+  build-publish-deploy:
+    name: Build, Publish and Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: debug
+        run: |
+          echo "${GITHUB_REF#refs/heads/}"
+          echo "${NAMESPACE}"

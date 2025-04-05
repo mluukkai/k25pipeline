@@ -2,6 +2,11 @@ name: Release application
 
 on:
   push:
+    branches:
+      - dev
+      - feature/*
+    tags:
+      - 'v*'
 
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
@@ -12,6 +17,7 @@ env:
   IMAGE: dwk-environments
   SERVICE: dwk-environments
   BRANCH: ${{ github.ref_name }}
+  NAMESPACE: ${GITHUB_REF#refs/heads/}
 
 jobs:
   build-publish-deploy:
