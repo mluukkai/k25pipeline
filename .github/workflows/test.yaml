@@ -12,7 +12,7 @@ env:
   IMAGE: dwk-environments
   SERVICE: dwk-environments
   BRANCH: ${{ github.ref_name }}
-  NAMESPACE: ${GITHUB_REF#refs/heads/}
+  NAMESPACE: ${{GITHUB_REF#refs/heads/}}
 
 jobs:
   build-publish-deploy:
