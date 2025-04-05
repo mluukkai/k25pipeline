@@ -12,7 +12,7 @@ env:
   IMAGE: dwk-environments
   SERVICE: dwk-environments
   BRANCH: ${{ github.ref_name }}
-  NAMESPACE: ${{ github.ref_name == 'bettercolor' && 'lol' || github.ref_name }}
+  NAMESPACE: ${{ github.ref_name == 'main' && 'example' || github.ref_name }}
 
 jobs:
   build-publish-deploy:

@@ -2,11 +2,6 @@ name: Release application
 
 on:
   push:
-    branches:
-      - dev
-      - feature/*
-    tags:
-      - 'v*'
 
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
@@ -17,7 +12,7 @@ env:
   IMAGE: dwk-environments
   SERVICE: dwk-environments
   BRANCH: ${{ github.ref_name }}
-  NAMESPACE: ${GITHUB_REF#refs/heads/}
+  NAMESPACE: ${{ github.ref_name == 'main' && 'lecture' || github.ref_name }}
 
 jobs:
   build-publish-deploy:
@@ -61,9 +56,9 @@ jobs:
 
       - name: Deploy
         run: |-
-          kubectl create namespace ${GITHUB_REF#refs/heads/} || true
-          kubectl config set-context --current --namespace=${GITHUB_REF#refs/heads/}
-          kustomize edit set namespace ${GITHUB_REF#refs/heads/}
+          kubectl create namespace "$NAMESPACE" || true
+          kubectl config set-context --current --namespace="$NAMESPACE
+          kustomize edit set namespace "$NAMESPACE"
           kustomize edit set image PROJECT/IMAGE="$IMAGE_TAG"
           kustomize build . | kubectl apply -f -
           kubectl rollout status deployment $SERVICE
