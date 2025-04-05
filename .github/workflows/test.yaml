@@ -12,7 +12,7 @@ env:
   IMAGE: dwk-environments
   SERVICE: dwk-environments
   BRANCH: ${{ github.ref_name }}
-  #NAMESPACE: ${{GITHUB_REF#refs/heads/}}
+  NAMESPACE: ${{ github.ref_name == 'bettercolor' && 'lol' || github.ref_name }}
 
 jobs:
   build-publish-deploy:
@@ -25,4 +25,4 @@ jobs:
       - name: debug
         run: |
           echo "${GITHUB_REF#refs/heads/}"
-          echo "${BRANCH}"
+          echo "${NAMESPACE}"
